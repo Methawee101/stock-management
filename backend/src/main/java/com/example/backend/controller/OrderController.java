@@ -41,4 +41,11 @@ public class OrderController {
             @RequestBody OrderStatusRequest request) {
         return ResponseEntity.ok(orderService.updateStatus(id, request));
     }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<OrderResponse>> filter(
+            @RequestParam(required = false) UUID platformId,
+            @RequestParam(required = false) String status) {
+        return ResponseEntity.ok(orderService.filter(platformId, status));
+    }
 }

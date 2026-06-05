@@ -157,4 +157,23 @@ public class OrderService {
 
         return toResponse(order);
     }
+
+    public List<OrderResponse> filter(UUID platformId, String status) {
+        List<Order> orders;
+
+        if (platformId != null && status != null) {
+            orders = orderRepository.findByPlatformIdAndStatus(
+                    platformId, Order.Status.valueOf(status));
+        } else if (platformId != null) {
+            orders = orderRepository.findByPlatformId(platformId);
+        } else if (status != null) {
+            orders = orderRepository.findByStatus(Order.Status.valueOf(status));
+        } else {
+            orders = orderRepository.findAll();
+        }
+
+        return orders.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
 }
