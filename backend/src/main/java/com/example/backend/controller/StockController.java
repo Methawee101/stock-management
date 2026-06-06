@@ -61,6 +61,11 @@ public class StockController {
         return ResponseEntity.ok(stockService.getMovementsByVariant(variantId));
     }
 
+    @GetMapping("/low-stock")
+    public ResponseEntity<List<StockItemResponse>> getLowStock() {
+        return ResponseEntity.ok(stockService.getLowStock());
+    }
+
 
 
 

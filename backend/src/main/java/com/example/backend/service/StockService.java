@@ -153,6 +153,14 @@ public class StockService {
                 .collect(Collectors.toList());
     }
 
+    public List<StockItemResponse> getLowStock() {
+        return stockItemRepository.findAll()
+                .stream()
+                .filter(s -> s.getQuantity() <= s.getProductVariant().getLowStockAlert())
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
     
 
 
