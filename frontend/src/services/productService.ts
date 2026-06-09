@@ -55,6 +55,17 @@ export const productService = {
         return res.data
     },
 
+    updateVariant: async(id: string, data: {
+        productId: string
+        sku: string
+        name: string
+        price: number
+        lowStockAlert: number
+    })=> {
+        const res = await  api.put(`/api/variants/${id}`,data)
+        return res.data
+    },
+
     deleteVariant: async(id:string) => {
         await api.delete(`/api/variants/${id}`)
     }
